@@ -1,0 +1,26 @@
+<h1> Event Details </h1>
+
+<p>
+  <strong>Event Name: </strong>
+  <%= @event.event_title %><br>
+  <strong>Event Description: </strong>
+  <%= @event.description %><br>
+  <strong>Event Date: </strong>
+  <%= @event.event_time %><br>
+  <strong>Event Location: </strong>
+  <%= @event.event_location %><br>
+</p>
+
+<% if user_signed_in? && !@event.attendees.include?(current_user) %>
+  <%= button_to 'Attend this event?', event_participations_path(@event) %>
+<% elsif user_signed_in? %>
+  <% participation = @event.participations.find_by(user_id: current_user.id) %>
+  <%= button_to 'Cancel attendance', event_participation_path(@event, participation), method: :delete if participation %>
+<% end %>
+
+<div class="attendees">
+  <h2>Attendees</h2>
+  <% @event.attendees.each do |attendee| %>
+    <p><%= attendee.email %></p>
+  <% end %>
+</div>

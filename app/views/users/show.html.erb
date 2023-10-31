@@ -1,0 +1,32 @@
+<h2> Created Events</h2>
+<% @events.each do |event| %>
+  <div class="event">
+    <h2><%= event.event_title %></h2>
+    <p><%= event.description %></p>
+    <p><%= event.event_time %></p>
+    <p><%= event.event_location %></p>
+  </div>
+<% end %>
+
+<br>
+
+<h2> Attended Events </h2>
+<% @attended_events.each do |event| %>
+  <% if event.event_time < Date.today %>
+    <div class="event">
+      <h2> Past Events </h2>
+      <h3><%= event.event_title %></h3>
+      <p><%= event.description %></p>
+      <p><%= event.event_time %></p>
+      <p><%= event.event_location %></p>
+    </div>
+  <% else %>
+    <div class="event">
+      <h2> Upcoming Events </h2>
+      <h3><%= event.event_title %></h3>
+      <p><%= event.description %></p>
+      <p><%= event.event_time %></p>
+      <p><%= event.event_location %></p>
+    </div>
+  <% end %>
+<% end %>

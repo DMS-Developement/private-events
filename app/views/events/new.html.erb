@@ -1,0 +1,25 @@
+<h1> Create a new event! </h1>
+
+<%= form_with model: @event do |form| %>
+  <% if @event.errors.any? %>
+    <div id="error">
+      <h2><%= pluralize(form.errors.count, "error") %></h2>
+      <ul>
+        <% form.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= form.label :event_title %><br>
+    <%= form.text_field :event_title, placeholder: "Event Title" %><br>
+    <%= form.label :event_location %>
+    <%= form.text_field :event_location, placeholder: "Event Location" %><br>
+    <%= form.label :event_time %>
+    <%= form.date_field :event_time, value: Date.today %><br>
+    <%= form.label :description %>
+    <%= form.text_area :description, placeholder: "Description" %><br>
+    <%= form.submit "Create Event" %>
+  </p>
+<% end %>
