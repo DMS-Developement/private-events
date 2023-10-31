@@ -4,6 +4,10 @@ class Event < ApplicationRecord
   has_many :attendees, through: :participations, source: :user
 
   def self.past_events
-    where('event_date < ?', Time.now)
+    where('event_time < ?', Time.now)
+  end
+
+  def self.upcoming_events
+    where('event_time > ?', Time.now)
   end
 end
